@@ -1,0 +1,47 @@
+/* custom.css */
+
+/* Mengatur warna latar belakang untuk seluruh halaman */
+body {
+    background-color: #f8f9fa; /* Warna latar belakang yang lebih terang */
+}
+
+/* Gaya untuk card */
+.card {
+    border: none; /* Menghilangkan border default */
+    border-radius: 10px; /* Membuat sudut card lebih bulat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
+}
+
+/* Gaya untuk header card */
+.card-header {
+    background-color: #007bff; /* Warna latar belakang header card */
+    color: white; /* Warna teks header */
+    border-top-left-radius: 10px; /* Membulatkan sudut kiri atas */
+    border-top-right-radius: 10px; /* Membulatkan sudut kanan atas */
+}
+
+/* Gaya untuk tombol sukses */
+.btn-success {
+    transition: background-color 0.3s; /* Menambahkan efek transisi */
+}
+
+/* Efek hover untuk tombol sukses */
+.btn-success:hover {
+    background-color: #0056b3; /* Warna saat hover */
+}
+
+/* Gaya untuk tabel */
+.table th, .table td {
+    vertical-align: middle; /* Menyelaraskan teks di tengah */
+}
+
+/* Efek hover untuk item dropdown */
+.dropdown-item:hover {
+    background-color: #f1f1f1; /* Warna latar belakang saat hover */
+}
+
+/* Gaya untuk footer */
+.footer {
+    background-color: #f8f9fa; /* Warna latar belakang footer */
+    color: #6c757d; /* Warna teks footer */
+}
