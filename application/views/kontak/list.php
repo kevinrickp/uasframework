@@ -11,9 +11,14 @@
                 </div>
                 <div class="card-body">
                     <?php if($this->session->flashdata('success')): ?>
-                        <div class="alert alert-success">
-                            <?= $this->session->flashdata('success') ?>
-                        </div>
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: '<?= $this->session->flashdata('success') ?>',
+                                confirmButtonText: 'OK'
+                            });
+                        </script>
                     <?php endif; ?>
 
                     <table class="table table-striped table-hover">
@@ -22,6 +27,7 @@
                                 <th>No</th>
                                 <th>Nomor KTP</th>
                                 <th>Nama</th>
+                                <th>Nomor HP</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -30,32 +36,16 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $kontak->no_ktp ?></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link" type="button" id="dropdownMenuButton" 
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <?= $kontak->nama ?>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="<?= site_url('kontak/ubah/'.$kontak->id) ?>">
-                                                <i class="fas fa-edit"></i> Ubah
-                                            </a>
-                                            <a class="dropdown-item text-danger" href="<?= site_url('kontak/hapus/'.$kontak->id) ?>" 
-                                               onclick="return confirm('Yakin hapus kontak?')">
-                                                <i class="fas fa-trash"></i> Hapus
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td><?= $kontak->nama ?></td>
+                                <td><?= $kontak->no_hp ?></td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <a href="<?= site_url('kontak/ubah/'.$kontak->id) ?>" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="<?= site_url('kontak/hapus/'.$kontak->id) ?>" class="btn btn-danger btn-sm" 
-                                           onclick="return confirm('Yakin hapus kontak?')">
+                                        <button class="btn btn-danger btn-sm btn-hapus" data-id="<?= $kontak->id ?>">
                                             <i class="fas fa-trash"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -67,3 +57,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.querySelectorAll('.btn-hapus').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data kontak ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?= site_url('kontak/hapus/') ?>" + id;
+                }
+            });
+        });
+    });
+</script>
